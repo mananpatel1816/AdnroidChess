@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/chessBoard"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="chessBoard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.101"
+        app:srcCompat="@drawable/chess" />
+
+    <ImageView
+        android:id="@+id/br"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="br"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/br" />
+
+    <ImageView
+        android:id="@+id/bn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:contentDescription="bn"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bn" />
+
+    <ImageView
+        android:id="@+id/bb"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:contentDescription="bb"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bb" />
+
+    <ImageView
+        android:id="@+id/bq"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:contentDescription="bq"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bq" />
+
+    <ImageView
+        android:id="@+id/bk"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="160dp"
+        android:contentDescription="bk"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bk" />
+
+    <ImageView
+        android:id="@+id/bb1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginLeft="200dp"
+        android:contentDescription="bb1"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bb" />
+    <ImageView
+        android:id="@+id/bn1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginLeft="240dp"
+        android:contentDescription="bn1"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bn" />
+
+    <ImageView
+        android:id="@+id/br1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginLeft="280dp"
+        android:contentDescription="br1"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/br" />
+
+    <ImageView
+        android:id="@+id/bp1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="bp1"
+        app:layout_constraintStart_toStartOf="@+id/br"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bp" />
+
+    <ImageView
+        android:id="@+id/bp2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="bp2"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bp" />
+
+    <ImageView
+        android:id="@+id/bp3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="bp3"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bp" />
+
+    <ImageView
+        android:id="@+id/bp4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="bp4"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bp" />
+
+    <ImageView
+        android:id="@+id/bp5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="bp5"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bp" />
+
+    <ImageView
+        android:id="@+id/bp6"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="bp1"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bp" />
+
+    <ImageView
+        android:id="@+id/bp7"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="bp7"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bp" />
+
+    <ImageView
+        android:id="@+id/bp8"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="bp8"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:layout_constraintTop_toTopOf="@+id/chessBoard"
+        app:srcCompat="@drawable/bp" />
+
+    <ImageView
+        android:id="@+id/wn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:contentDescription="wn"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wn" />
+
+    <ImageView
+        android:id="@+id/wb"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:contentDescription="wb"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wb" />
+
+    <ImageView
+        android:id="@+id/wq"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:contentDescription="wq"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wq" />
+
+    <ImageView
+        android:id="@+id/wk"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="160dp"
+        android:contentDescription="wk"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wk" />
+
+    <ImageView
+        android:id="@+id/wb1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginLeft="200dp"
+        android:contentDescription="wb1"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wb" />
+
+    <ImageView
+        android:id="@+id/wn1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginLeft="240dp"
+        android:contentDescription="wn1"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wn" />
+
+    <ImageView
+        android:id="@+id/wr1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginLeft="280dp"
+        android:contentDescription="wr1"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wr" />
+
+    <ImageView
+        android:id="@+id/wr"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="wr"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wr" />
+
+    <ImageView
+        android:id="@+id/wp1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="wp1"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wp" />
+
+    <ImageView
+        android:id="@+id/wp2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="wp2"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wp" />
+
+    <ImageView
+        android:id="@+id/wp3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="wp3"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wp" />
+
+    <ImageView
+        android:id="@+id/wp4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="wp4"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wp" />
+
+    <ImageView
+        android:id="@+id/wp5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="wp5"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wp" />
+
+    <ImageView
+        android:id="@+id/wp6"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="wp6"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wp" />
+
+    <ImageView
+        android:id="@+id/wp7"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginLeft="240dp"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="wp7"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wp" />
+
+    <ImageView
+        android:id="@+id/wp8"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginLeft="280dp"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="wp8"
+        app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
+        app:layout_constraintStart_toStartOf="@+id/chessBoard"
+        app:srcCompat="@drawable/wp" />
+
+    <TextView
+        android:id="@+id/turnLable"
+        android:layout_width="195dp"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:text="White's Move"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="-3dp" />
+
+    <Button
+        android:id="@+id/aiButton"
+        android:layout_width="72dp"
+        android:layout_height="42dp"
+        android:text="AI"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/turnLable"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="-3dp" />
+
+    <Button
+        android:id="@+id/undoButton"
+        android:layout_width="72dp"
+        android:layout_height="42dp"
+        android:text="Undo"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/turnLable"
+        tools:layout_editor_absoluteY="-3dp" />
+
+    <Button
+        android:id="@+id/drawButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="40dp"
+        android:text="Draw"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chessBoard" />
+
+    <Button
+        android:id="@+id/resignButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="72dp"
+        android:text="Resign"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chessBoard" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
