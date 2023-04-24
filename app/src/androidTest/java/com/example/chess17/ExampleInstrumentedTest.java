@@ -1,4 +1,4 @@
-package app.chess;
+package com.example.chess17;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("app.chess", appContext.getPackageName());
+        assertEquals("com.example.chess17", appContext.getPackageName());
     }
 }
