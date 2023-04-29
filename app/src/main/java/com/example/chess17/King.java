@@ -107,7 +107,7 @@ public class King extends Pieces
         {
             if(gameBoard[fromR][fromC].name.charAt(0) == 'w')
             {
-                if(fromC < toC && !gameBoard[7][7].isMoved)
+                if(gameBoard[7][7] != null && fromC < toC && !gameBoard[7][7].isMoved)
                 {
                     if(gameBoard[7][5] == null && gameBoard[7][6] == null)
                     {
@@ -117,7 +117,7 @@ public class King extends Pieces
                 }
                 else
                 {
-                    if(!gameBoard[7][0].isMoved && gameBoard[7][1] == null && gameBoard[7][2] == null && gameBoard[7][3] == null)
+                    if(gameBoard[7][0] != null && !gameBoard[7][0].isMoved && gameBoard[7][1] == null && gameBoard[7][2] == null && gameBoard[7][3] == null)
                     {
                         isCastle = true;
                         return true;
@@ -126,7 +126,7 @@ public class King extends Pieces
             }
             else
             {
-                if(fromC < toC && !gameBoard[0][7].isMoved)
+                if(gameBoard[0][7] != null && fromC < toC && !gameBoard[0][7].isMoved)
                 {
                     if(gameBoard[0][5] == null && gameBoard[0][6] == null)
                     {
@@ -136,7 +136,7 @@ public class King extends Pieces
                 }
                 else
                 {
-                    if(!gameBoard[0][0].isMoved && gameBoard[0][1] == null && gameBoard[0][2] == null && gameBoard[0][3] == null)
+                    if(gameBoard[0][0] != null && !gameBoard[0][0].isMoved && gameBoard[0][1] == null && gameBoard[0][2] == null && gameBoard[0][3] == null)
                     {
                         isCastle = true;
                         return true;

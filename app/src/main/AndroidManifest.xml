@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".play" />
+        <activity android:name=".playback" />
     </application>
 
 </manifest>

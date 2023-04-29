@@ -18,7 +18,9 @@ public abstract class Pieces {
      The promotion type of the pawn if it reaches the end of the board.
      */
     char promotion;
-    boolean isMoved, isCastle = false;
+    boolean isMoved, isCastle = false, enpassant = false, promote = false;
+
+    static int whiteCount = 2, blackCount = 2;
 
 
     /**

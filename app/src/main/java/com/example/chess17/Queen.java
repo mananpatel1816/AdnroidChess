@@ -17,8 +17,9 @@ public class Queen extends Pieces
      Constructs a Queen piece with a given color.
      @param c The color of the Queen piece, represented as a char.
      */
-    public  Queen(char c)
+    public  Queen(char c, int num)
     {
+        this.num = num;
         this.color = c;
         name = color + "Q";
     }
@@ -34,8 +35,8 @@ public class Queen extends Pieces
      */
     public void move(Pieces[][] gameBoard, int fromR, int fromC, int toR, int toC)
     {
+        gameBoard[toR][toC] = gameBoard[fromR][fromC];
         gameBoard[fromR][fromC] = null;
-        gameBoard[toR][toC] = new Queen(color);
     }
 
 

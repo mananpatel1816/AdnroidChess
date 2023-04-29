@@ -24,6 +24,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button playback = findViewById(R.id.playback);
+        playback.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, playback.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
 
 }

@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-
-
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/playbackLayout"
     android:layout_alignParentTop="true"
     android:layout_alignParentRight="true">
 
+
     <RelativeLayout
-        android:id= "@+id/playArea"
+        android:id= "@+id/recordScreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/wood"
         tools:layout_editor_absoluteX="67dp"
         tools:layout_editor_absoluteY="16dp">
 
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="67dp"
+            android:layout_height="43dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="44dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginRight="313dp"
+            app:srcCompat="@drawable/main" />
 
         <ImageView
             android:id="@+id/whiteTurn"
@@ -32,56 +39,6 @@
             android:layout_marginRight="310dp"
             app:srcCompat="@drawable/wa" />
 
-        <ImageButton
-            android:id="@+id/whiteUndo"
-            android:layout_width="wrap_content"
-            android:layout_height="29dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="447dp"
-            android:layout_marginRight="264dp"
-            app:srcCompat="@drawable/undo" />
-
-        <ImageButton
-            android:id="@+id/home"
-            android:layout_width="67dp"
-            android:layout_height="43dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="313dp"
-            app:srcCompat="@drawable/main" />
-
-        <ImageButton
-            android:id="@+id/draw"
-            android:layout_width="57dp"
-            android:layout_height="35dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="479dp"
-            android:layout_marginRight="84dp"
-            app:srcCompat="@drawable/draw" />
-
-        <ImageButton
-            android:id="@+id/bot"
-            android:layout_width="67dp"
-            android:layout_height="43dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="6dp"
-            android:layout_marginRight="7dp"
-            app:srcCompat="@drawable/bot" />
-
-        <ImageButton
-            android:id="@+id/resign"
-            android:layout_width="57dp"
-            android:layout_height="35dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="476dp"
-            android:layout_marginRight="189dp"
-            app:srcCompat="@drawable/resign" />
-
         <ImageView
             android:id="@+id/blackTurn"
             android:layout_width="51dp"
@@ -92,29 +49,8 @@
             android:layout_marginRight="36dp"
             app:srcCompat="@drawable/ba" />
 
-        <ImageButton
-            android:id="@+id/blackUndo"
-            android:layout_width="wrap_content"
-            android:layout_height="29dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="81dp"
-            android:layout_marginRight="83dp"
-            app:srcCompat="@drawable/undo" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="133dp"
-            android:layout_height="36dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="123dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="White's Move"
-            android:textColor="#F1ECEC"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+
 
         <RelativeLayout
             android:id="@+id/board_layout"
@@ -128,8 +64,8 @@
 
             <ImageView
                 android:id="@+id/chessBoard"
-                android:layout_width="320dp"
-                android:layout_height="320dp"
+                android:layout_width="wrap_content"
+                android:layout_height="323dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="1dp"
@@ -369,8 +305,8 @@
                 android:id="@+id/wp1"
                 android:layout_width="36dp"
                 android:layout_height="34dp"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginTop="243dp"
                 android:contentDescription="wp1"
                 app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
@@ -540,8 +476,8 @@
                 android:id="@+id/wr1"
                 android:layout_width="37dp"
                 android:layout_height="37dp"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginTop="281dp"
                 android:contentDescription="wr"
                 app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
@@ -564,98 +500,21 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/whiteCheck"
+        <Button
+            android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="159dp"
-            android:layout_marginTop="448dp"
-            android:textColor="#F1ECEC"
-            android:textSize="15sp"
-            android:text="TextView" />
 
-        <TextView
-            android:id="@+id/blackCheck"
-            android:layout_width="69dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="252dp"
-            android:layout_marginTop="63dp"
-            android:text=" "
-            android:textColor="#F1ECEC"
-            android:textSize="15sp" />
-
-        <!--        <FrameLayout-->
-<!--            android:layout_width="340dp"-->
-<!--            android:layout_height="319dp"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:layout_marginTop="106dp"-->
-<!--            android:layout_marginRight="33dp">-->
-
-<!--            <androidx.gridlayout.widget.GridLayout-->
-<!--                android:id="@+id/chess"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                app:rowCount="8"-->
-<!--                app:columnCount="8">-->
-
-<!--                &lt;!&ndash; Add code here to create the cells of the chessboard &ndash;&gt;-->
-
-<!--            </androidx.gridlayout.widget.GridLayout>-->
-
-<!--            <androidx.gridlayout.widget.GridLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                app:columnCount="8"-->
-<!--                app:rowCount="8">-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/blackRook"-->
-<!--                    android:layout_width="48dp"-->
-<!--                    android:layout_height="48dp"-->
-<!--                    app:layout_column="0"-->
-<!--                    app:layout_row="0"-->
-<!--                    app:srcCompat="@drawable/br"/>-->
-
-
-<!--            </androidx.gridlayout.widget.GridLayout>-->
-
-
-<!--            <ImageView-->
-<!--                android:id="@+id/imageView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:scaleType="centerCrop"-->
-<!--                android:src="@drawable/chess"/>-->
-
-<!--        </FrameLayout>-->
+            android:layout_marginLeft="161dp"
+            android:layout_marginTop="466dp"
+            android:text="Button" />
 
 
     </RelativeLayout>
 
 
-    <!--    <ImageView-->
-<!--        android:id="@+id/chessBoard"-->
-<!--        android:layout_width="320dp"-->
-<!--        android:layout_height="320dp"-->
-<!--        android:layout_marginTop="70dp"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:contentDescription="chessBoard"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.454"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.326"-->
-<!--        app:srcCompat="@drawable/chess" />-->
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

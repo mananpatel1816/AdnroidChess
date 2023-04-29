@@ -44,12 +44,24 @@ public class Pawn extends Pieces
     {
         if (color == 'w' && toR == 0) {
             gameBoard[toR][toC] = promo(promotion);
+            gameBoard[toR][toC].promote = true;
         } else if (color == 'b' && toR == 7) {
+            promote = true;
             gameBoard[toR][toC] = promo(promotion);
-        } else {
+            gameBoard[toR][toC].promote = true;
+        } else
+        {
 
-            if(gameBoard[toR][toC] == null && Math.abs(fromC-toC) == 1 && justMoved)
-                gameBoard[fromR][toC] = null;
+            if(enpassant)
+            {
+                if(gameBoard[toR][toC] == null && Math.abs(fromC-toC) == 1 && justMoved)
+                {
+                    gameBoard[fromR][toC] = null;
+                    enpassant = false;
+                }
+            }
+//            if(gameBoard[toR][toC] == null && Math.abs(fromC-toC) == 1 && justMoved)
+//                gameBoard[fromR][toC] = null;
 
             gameBoard[toR][toC] = gameBoard[fromR][fromC];
 
@@ -86,11 +98,19 @@ public class Pawn extends Pieces
      */
     public boolean isValid(Pieces[][] gameBoard, int fromR, int fromC, int toR, int toC)
     {
-        if(Math.abs(fromC-toC) == 1 && Math.abs(fromR-toR) == 1 && gameBoard[toR][toC] == null && gameBoard[fromR][toC].name.charAt(0) != color && justMoved)
+        if(Math.abs(fromC-toC) == 1 && Math.abs(fromR-toR) == 1 && gameBoard[toR][toC] == null && gameBoard[fromR][toC] != null && gameBoard[fromR][toC].name.charAt(0) != color && justMoved)
+        {
+            enpassant = true;
             return true;
+        }
 
         if(Math.abs(fromC-toC) == 1 && Math.abs(fromR-toR) == 1 && gameBoard[toR][toC] != null && gameBoard[toR][toC].name.charAt(0) != color)
-            return true;
+        {
+            if(gameBoard[fromR][fromC].name.charAt(0) == 'b' && toR > fromR)
+                return true;
+            else if(gameBoard[fromR][fromC].name.charAt(0) == 'w' && toR < fromR)
+                return true;
+        }
 
 
         if(color == 'w' && ( (fromR==6 && toR == fromR -2 && gameBoard[toR+1][toC] == null) ||toR == fromR-1 ) && fromC == toC && gameBoard[toR][toC] == null )
@@ -118,7 +138,7 @@ public class Pawn extends Pieces
         if(c == 'B')
             return new Bishop(color, num);
 
-        return new Queen(color);
+        return new Queen(color, (color == 'w') ? whiteCount++ : blackCount++ );
     }
 
 }

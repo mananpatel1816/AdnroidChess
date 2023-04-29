@@ -60,44 +60,24 @@ public class Rook extends Pieces
             if(gameBoard[toR][toC] != null && gameBoard[toR][toC].name.charAt(0) == color)
                 return false;
 
-            if(fromR == toR)
-            {
-                int lim = fromC > toC ? fromC : toC;
-                int i = fromC < toC ? fromC : toC;
+            int rowDiff = toR - fromR;
+            int colDiff = toC - fromC;
+            int rowDirection = rowDiff == 0 ? 0 : rowDiff / Math.abs(rowDiff);
+            int colDirection = colDiff == 0 ? 0 : colDiff / Math.abs(colDiff);
+            int currentRow = fromR + rowDirection;
+            int currentCol = fromC + colDirection;
 
-                while(i < lim)
-                {
-                    if(i == fromC || i == toC)
-                    {
-                        i++;
-                        continue;
-                    }
-
-                    if(gameBoard[fromR][i] != null)
-                        return false;
-                    i++;
+            while (currentRow != toR || currentCol != toC) {
+                if (gameBoard[currentRow][currentCol] != null) {
+                    return false;
                 }
-                return true;
-            }
-            else
-            {
-                int lim = fromR > toC ? fromR : toR;
-                int i = fromR < toR ? fromR : toR;
 
-                while(i < lim)
-                {
-                    if(i == fromR || i == toR)
-                    {
-                        i++;
-                        continue;
-                    }
-
-                    if(gameBoard[i][fromC] != null)
-                        return false;
-                    i++;
-                }
-                return true;
+                currentRow += rowDirection;
+                currentCol += colDirection;
             }
+
+            // All conditions passed, move is valid
+            return true;
         }
 
         return false;

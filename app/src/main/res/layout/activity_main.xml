@@ -25,8 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="467dp"
-            android:layout_marginRight="99dp"
+            android:layout_marginTop="464dp"
+            android:layout_marginRight="145dp"
             android:text="Playback" />
 
         <Button
@@ -35,8 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="382dp"
-            android:layout_marginRight="117dp"
+            android:layout_marginTop="381dp"
+            android:layout_marginRight="164dp"
             android:text="Play" />
 
 
