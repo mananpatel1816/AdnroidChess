@@ -64,8 +64,8 @@
 
             <ImageView
                 android:id="@+id/chessBoard"
-                android:layout_width="wrap_content"
-                android:layout_height="323dp"
+                android:layout_width="320dp"
+                android:layout_height="320dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="1dp"
@@ -453,7 +453,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="160dp"
                 android:layout_marginTop="281dp"
-                android:layout_marginRight="122dp"
                 android:contentDescription="wk"
                 app:layout_constraintBottom_toBottomOf="@+id/chessBoard"
                 app:layout_constraintStart_toStartOf="@+id/chessBoard"
@@ -506,10 +505,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-
             android:layout_marginLeft="161dp"
             android:layout_marginTop="466dp"
-            android:text="Button" />
+            android:text="Next" />
 
 
     </RelativeLayout>

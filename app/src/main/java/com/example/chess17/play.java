@@ -69,6 +69,8 @@ public class play extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play);
 
+        wTurn = true;
+
         context = this;
 
         start(gameBoard); // initializes the gameBoard
@@ -90,7 +92,8 @@ public class play extends AppCompatActivity {
 
         ImageButton AIButton = findViewById(R.id.bot);
 
-        AIButton.setOnClickListener(new View.OnClickListener() {
+        AIButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
 
@@ -247,6 +250,18 @@ public class play extends AppCompatActivity {
                                 params.leftMargin = newCol * squareSize;
                                 params.topMargin = newRow * squareSize;
 
+                                gameMoves.append(pieceToMove.getId()).append(",").append(params.leftMargin).append(",").append(params.topMargin).append(",");
+                                if(pieceToRemove != null)
+                                {
+                                    System.out.println(pieceToRemove.getId() + "," + 0 + "," + 0 + ",");
+                                    gameMoves.append(pieceToRemove.getId()).append(",").append(-1).append(",").append(-1).append(",");
+                                }
+                                else if(!castle && !passant)
+                                {
+                                    System.out.println( 0 + "," + 0 + "," + 0 + ",");
+                                    gameMoves.append(-1).append(",").append(-1).append(",").append(-1).append(",");
+                                }
+
 
                                 ViewGroup parent = (ViewGroup) pieceToMove.getParent();
 //                                        ViewGroup removeParent = (ViewGroup) pieceToRemove.getParent();
@@ -267,6 +282,7 @@ public class play extends AppCompatActivity {
                                             castleParams.leftMargin = (newCol - 1) * squareSize;
                                             castleParams.topMargin = newRow * squareSize;
 
+                                            gameMoves.append(rookCastle.getId()).append(",").append(castleParams.leftMargin).append(",").append(castleParams.topMargin).append(",");
                                             parent.removeView(rookCastle);
 
                                             boardLayout.addView(rookCastle, castleParams);
@@ -281,6 +297,7 @@ public class play extends AppCompatActivity {
                                             castleParams.leftMargin = (newCol + 1) * squareSize;
                                             castleParams.topMargin = newRow * squareSize;
 
+                                            gameMoves.append(rookCastle.getId()).append(",").append(castleParams.leftMargin).append(",").append(castleParams.topMargin).append(",");
                                             parent.removeView(rookCastle);
 
                                             boardLayout.addView(rookCastle, castleParams);
@@ -294,6 +311,7 @@ public class play extends AppCompatActivity {
                                         ImageView pawnEnpassant = findViewById(enPassantresId);
                                         prevToImage = pawnEnpassant;
 
+                                        gameMoves.append(pawnEnpassant.getId()).append(",").append(-1).append(",").append(-1).append(",");
                                         parent.removeView(pawnEnpassant);
                                         passant = false;
                                     }
@@ -318,9 +336,14 @@ public class play extends AppCompatActivity {
                                             //System.out.println("New ID for queen: " + newId);
                                             pieceToMove.setId(newId);
                                             gameBoard[newRow][newCol].num = newId;
+
+                                            gameMoves.append(pieceToMove.getId()).append(",").append(R.drawable.wq).append("\n");
                                             gameBoard[newRow][newCol].promote = false;
                                         } else
+                                        {
                                             undoPawn = null;
+                                            gameMoves.append(-1).append(",").append(-1).append("\n");
+                                        }
                                     }
                                 }
                                 numClicks = 0;
@@ -357,7 +380,8 @@ public class play extends AppCompatActivity {
             }
         });
 
-        whiteUndoButton.setOnClickListener(new View.OnClickListener() {
+        whiteUndoButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
@@ -441,6 +465,14 @@ public class play extends AppCompatActivity {
                         parent.removeView(prevToImage);
                         boardLayout.addView(prevToImage, toParam);
                     }
+                }
+
+                int lastMove = gameMoves.lastIndexOf("\n", gameMoves.lastIndexOf("\n") - 1);
+
+                if (lastMove >= 0) {
+                    // Delete the last line from the StringBuilder
+                    gameMoves.delete(lastMove, gameMoves.length());
+                    gameMoves.append("\n");
                 }
 
                 wTurn = true;
@@ -454,7 +486,8 @@ public class play extends AppCompatActivity {
             }
         });
 
-        blackUndoButton.setOnClickListener(new View.OnClickListener() {
+        blackUndoButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
@@ -538,6 +571,14 @@ public class play extends AppCompatActivity {
                         parent.removeView(prevToImage);
                         boardLayout.addView(prevToImage, toParam);
                     }
+                }
+
+                int lastMove = gameMoves.lastIndexOf("\n", gameMoves.lastIndexOf("\n") - 1);
+
+                if (lastMove >= 0) {
+                    // Delete the last line from the StringBuilder
+                    gameMoves.delete(lastMove, gameMoves.length());
+                    gameMoves.append("\n");
                 }
 
                 wTurn = false;
@@ -553,7 +594,8 @@ public class play extends AppCompatActivity {
 
 
 
-        chessboardImage.setOnTouchListener(new View.OnTouchListener() {
+        chessboardImage.setOnTouchListener(new View.OnTouchListener()
+        {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 int action = event.getAction();
@@ -719,13 +761,19 @@ public class play extends AppCompatActivity {
                                         params.leftMargin = toCol * squareSize;
                                         params.topMargin = toRow * squareSize;
 
-
                                         gameMoves.append(pieceToMove.getId()).append(",").append(params.leftMargin).append(",").append(params.topMargin).append(",");
                                         if(pieceToRemove != null)
-                                            gameMoves.append(pieceToRemove.getId());
-                                        else
-                                            gameMoves.append(0);
-                                        gameMoves.append("\n");
+                                        {
+                                            System.out.println(pieceToRemove.getId() + "," + 0 + "," + 0 + ",");
+                                            gameMoves.append(pieceToRemove.getId()).append(",").append(-1).append(",").append(-1).append(",");
+                                        }
+                                        else if(!castle && !passant)
+                                        {
+                                            System.out.println( 0 + "," + 0 + "," + 0 + ",");
+                                            gameMoves.append(-1).append(",").append(-1).append(",").append(-1).append(",");
+                                        }
+
+                                        //gameMoves.append("\n");
 
                                         ViewGroup parent = (ViewGroup) pieceToMove.getParent();
 //                                        ViewGroup removeParent = (ViewGroup) pieceToRemove.getParent();
@@ -741,12 +789,17 @@ public class play extends AppCompatActivity {
                                                     prevToCol = 7;
                                                     toPiece = gameBoard[fromRow][toCol-1];
 
+
                                                     ImageView rookCastle = findViewById(R.id.wr2);
+
                                                     prevToImage = rookCastle;
 
                                                     RelativeLayout.LayoutParams castleParams = (RelativeLayout.LayoutParams) rookCastle.getLayoutParams();
                                                     castleParams.leftMargin = (toCol-1) * squareSize;
                                                     castleParams.topMargin = toRow * squareSize;
+
+                                                    System.out.println("Recording Error check: " + rookCastle.getId() + "," + castleParams.leftMargin + "," + castleParams.topMargin + ",");
+                                                    gameMoves.append(rookCastle.getId()).append(",").append(castleParams.leftMargin).append(",").append(castleParams.topMargin).append(",");
 
                                                     parent.removeView(rookCastle);
 
@@ -764,6 +817,9 @@ public class play extends AppCompatActivity {
                                                     castleParams.leftMargin = (toCol+1) * squareSize;
                                                     castleParams.topMargin = toRow * squareSize;
 
+                                                    System.out.println("Recording Error check: " + rookCastle.getId() + "," + castleParams.leftMargin + "," + castleParams.topMargin + ",");
+                                                    gameMoves.append(rookCastle.getId()).append(",").append(castleParams.leftMargin).append(",").append(castleParams.topMargin).append(",");
+
                                                     parent.removeView(rookCastle);
 
                                                     boardLayout.addView(rookCastle, castleParams);
@@ -778,12 +834,15 @@ public class play extends AppCompatActivity {
                                                 ImageView pawnEnpassant = findViewById(enPassantresId);
                                                 prevToImage = pawnEnpassant;
 
+                                                System.out.println(pawnEnpassant.getId() + "," + 0 + "," + 0 + ",");
+                                                gameMoves.append(pawnEnpassant.getId()).append(",").append(-1).append(",").append(-1).append(",");
                                                 parent.removeView(pawnEnpassant);
                                                 passant = false;
                                             }
 
                                             if (pieceToMove != null) {
                                                 boardLayout.addView(pieceToMove, params);
+
                                                 if(gameBoard[toRow][toCol].promote)
                                                 {
                                                     pawnImgResource = R.drawable.wp;
@@ -803,11 +862,19 @@ public class play extends AppCompatActivity {
                                                     //int newId = getResources().getIdentifier(id, "id", getPackageName());
                                                     //System.out.println("New ID for queen: " + newId);
                                                     pieceToMove.setId(newId);
+
+                                                    System.out.println(pieceToMove.getId());
+                                                    gameMoves.append(pieceToMove.getId()).append(",").append(R.drawable.wq).append("\n");
+
                                                     gameBoard[toRow][toCol].num = newId;
                                                     gameBoard[toRow][toCol].promote = false;
                                                 }
                                                 else
+                                                {
                                                     undoPawn = null;
+                                                    System.out.println(0);
+                                                    gameMoves.append(-1).append(",").append(-1).append("\n");
+                                                }
                                             }
                                         }
 
@@ -998,12 +1065,18 @@ public class play extends AppCompatActivity {
                                         params.leftMargin = toCol * squareSize;
                                         params.topMargin = toRow * squareSize;
 
+                                        System.out.println(pieceToMove.getId() + "," + params.leftMargin + "," + params.topMargin + ",");
                                         gameMoves.append(pieceToMove.getId()).append(",").append(params.leftMargin).append(",").append(params.topMargin).append(",");
                                         if(pieceToRemove != null)
-                                            gameMoves.append(pieceToRemove.getId());
-                                        else
-                                            gameMoves.append(0);
-                                        gameMoves.append("\n");
+                                        {
+                                            System.out.println(pieceToRemove.getId() + "," + 0 + "," + 0 + ",");
+                                            gameMoves.append(pieceToRemove.getId()).append(",").append(-1).append(",").append(-1).append(",");
+                                        }
+                                        else if(!castle && !passant)
+                                        {
+                                            System.out.println(0 + "," + 0 + "," + 0 + ",");
+                                            gameMoves.append(-1).append(",").append(-1).append(",").append(-1).append(",");
+                                        }
 
 
                                         ViewGroup parent = (ViewGroup) pieceToMove.getParent();
@@ -1028,6 +1101,10 @@ public class play extends AppCompatActivity {
                                                     castleParams.leftMargin = (toCol-1) * squareSize;
                                                     castleParams.topMargin = toRow * squareSize;
 
+                                                    System.out.println("Recording Error check: " + rookCastle.getId() + "," + castleParams.leftMargin + "," + castleParams.topMargin + ",");
+
+                                                    gameMoves.append(rookCastle.getId()).append(",").append(castleParams.leftMargin).append(",").append(castleParams.topMargin).append(",");
+
                                                     parent.removeView(rookCastle);
 
                                                     boardLayout.addView(rookCastle, castleParams);
@@ -1045,6 +1122,9 @@ public class play extends AppCompatActivity {
                                                     castleParams.leftMargin = (toCol+1) * squareSize;
                                                     castleParams.topMargin = toRow * squareSize;
 
+                                                    System.out.println("Recording Error check: " + rookCastle.getId() + "," + castleParams.leftMargin + "," + castleParams.topMargin + ",");
+                                                    gameMoves.append(rookCastle.getId()).append(",").append(castleParams.leftMargin).append(",").append(castleParams.topMargin).append(",");
+
                                                     parent.removeView(rookCastle);
 
                                                     boardLayout.addView(rookCastle, castleParams);
@@ -1058,6 +1138,9 @@ public class play extends AppCompatActivity {
 
                                                 ImageView pawnEnpassant = findViewById(enPassantresId);
                                                 prevToImage = pawnEnpassant;
+
+                                                System.out.println(pawnEnpassant.getId()+ "," + 0 + "," + 0 + ",");
+                                                gameMoves.append(pawnEnpassant.getId()).append(",").append(-1).append(",").append(-1).append(",");
 
                                                 parent.removeView(pawnEnpassant);
                                                 passant = false;
@@ -1086,13 +1169,20 @@ public class play extends AppCompatActivity {
                                                     //System.out.println("New ID for queen: " + newId);
                                                     pieceToMove.setId(newId);
                                                     gameBoard[toRow][toCol].num = newId;
+
+                                                    System.out.println(pieceToMove.getId());
+                                                    gameMoves.append(pieceToMove.getId()).append(",").append(R.drawable.bq).append("\n");
 //                                                    System.out.println("New ID: " + newId);
                                                     //System.out.println("Id of black Queen" + gameBoard[toRow][toCol].num + " " + newId);
 
                                                     gameBoard[toRow][toCol].promote = false;
                                                 }
                                                 else
+                                                {
                                                     undoPawn = null;
+                                                    System.out.println(0);
+                                                    gameMoves.append(-1).append(",").append(-1).append("\n");
+                                                }
                                             }
                                         }
 
@@ -1243,7 +1333,8 @@ public class play extends AppCompatActivity {
 
 
         draw = findViewById(R.id.draw);
-        draw.setOnClickListener(new View.OnClickListener() {
+        draw.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(play.this);
@@ -1255,7 +1346,6 @@ public class play extends AppCompatActivity {
                 // Set the "OK" button
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
                     }
                 });
 
@@ -1274,7 +1364,8 @@ public class play extends AppCompatActivity {
 
 
         resign = findViewById(R.id.resign);
-        resign.setOnClickListener(new View.OnClickListener() {
+        resign.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(play.this);
@@ -1307,6 +1398,7 @@ public class play extends AppCompatActivity {
                                     FileWriter fileWriter = new FileWriter(file);
                                     fileWriter.write(gameMoves.toString());
                                     fileWriter.close();
+
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }

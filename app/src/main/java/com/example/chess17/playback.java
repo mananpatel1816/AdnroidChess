@@ -1,18 +1,14 @@
 package com.example.chess17;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.gridlayout.widget.GridLayout;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,6 +22,7 @@ public class playback extends AppCompatActivity
 {
 
     private Context context;
+    static String name;
     int lineCounter = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +34,14 @@ public class playback extends AppCompatActivity
         ArrayList<String> lines = new ArrayList<>();
 
         File recordedGamesFolder = new File(context.getFilesDir(), "RecordedGames");
-        File file = new File(recordedGamesFolder, "try" + ".txt");
+        File file = new File(recordedGamesFolder, name + ".txt");
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
 
             String line;
             while ((line = reader.readLine()) != null)
             {
+                System.out.println(line);
                 lines.add(line);
             }
 
@@ -52,9 +50,9 @@ public class playback extends AppCompatActivity
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Button AIButton = findViewById(R.id.next);
+        Button nextButton = findViewById(R.id.next);
 
-        AIButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -70,8 +68,11 @@ public class playback extends AppCompatActivity
                     params.topMargin = info[2];
 
                     ImageView pieceToRemove = null;
-                    if (info[3] != 0)
+
+                    if (info[3] != -1)
                         pieceToRemove = findViewById(info[3]);
+
+                    System.out.println("pieceToRemove: " + info[3]);
 
                     ViewGroup parent = (ViewGroup) pieceToMove.getParent();
 //                                        ViewGroup removeParent = (ViewGroup) pieceToRemove.getParent();
@@ -82,6 +83,21 @@ public class playback extends AppCompatActivity
 
                         if (pieceToMove != null)
                             boardLayout.addView(pieceToMove, params);
+                        if(pieceToRemove != null && info[4] != -1 && info[5] != -1)
+                        {
+                            RelativeLayout.LayoutParams castleParams = (RelativeLayout.LayoutParams) pieceToRemove.getLayoutParams();
+                            castleParams.leftMargin = info[4];
+                            castleParams.topMargin = info[5];
+                            System.out.println("Remove left Margin: " + info[4]);
+                            System.out.println("Remove right Margin: " + info[5]);
+
+                            boardLayout.addView(pieceToRemove, castleParams);
+                        }
+                        if(info[6] != -1 && info[7] != -1)
+                        {
+                            pieceToMove.setId(info[6]);
+                            pieceToMove.setImageResource(info[7]);
+                        }
                     }
 
                 }
