@@ -34,13 +34,15 @@
 
         <ImageButton
             android:id="@+id/whiteUndo"
-            android:layout_width="wrap_content"
-            android:layout_height="29dp"
+            android:layout_width="29dp"
+            android:layout_height="27dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="447dp"
-            android:layout_marginRight="264dp"
-            app:srcCompat="@drawable/undo" />
+            android:layout_marginRight="281dp"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/undo"
+            app:tint="@color/white" />
 
         <ImageButton
             android:id="@+id/home"
@@ -50,7 +52,9 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="4dp"
             android:layout_marginRight="313dp"
-            app:srcCompat="@drawable/main" />
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/main"
+            app:tint="@color/white" />
 
         <ImageButton
             android:id="@+id/draw"
@@ -58,9 +62,11 @@
             android:layout_height="35dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="479dp"
+            android:layout_marginTop="455dp"
             android:layout_marginRight="84dp"
-            app:srcCompat="@drawable/draw" />
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/draw"
+            app:tint="@color/white" />
 
         <ImageButton
             android:id="@+id/bot"
@@ -70,7 +76,9 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="6dp"
             android:layout_marginRight="7dp"
-            app:srcCompat="@drawable/bot" />
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/bot"
+            app:tint="@color/white" />
 
         <ImageButton
             android:id="@+id/resign"
@@ -78,9 +86,11 @@
             android:layout_height="35dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="476dp"
+            android:layout_marginTop="456dp"
             android:layout_marginRight="189dp"
-            app:srcCompat="@drawable/resign" />
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/resign"
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/blackTurn"
@@ -94,13 +104,15 @@
 
         <ImageButton
             android:id="@+id/blackUndo"
-            android:layout_width="wrap_content"
-            android:layout_height="29dp"
+            android:layout_width="33dp"
+            android:layout_height="21dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="81dp"
-            android:layout_marginRight="83dp"
-            app:srcCompat="@drawable/undo" />
+            android:layout_marginRight="88dp"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/undo"
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/textView"
@@ -566,15 +578,15 @@
 
         <TextView
             android:id="@+id/whiteCheck"
-            android:layout_width="wrap_content"
+            android:layout_width="92dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="159dp"
-            android:layout_marginTop="448dp"
-            android:textColor="#F1ECEC"
-            android:textSize="15sp"
-            android:text="TextView" />
+            android:layout_marginLeft="104dp"
+            android:layout_marginTop="429dp"
+            android:text=""
+            android:textColor="#FFEB3B"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/blackCheck"
@@ -582,11 +594,45 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="252dp"
-            android:layout_marginTop="63dp"
-            android:text=" "
-            android:textColor="#F1ECEC"
-            android:textSize="15sp" />
+            android:layout_marginLeft="223dp"
+            android:layout_marginTop="57dp"
+            android:text=""
+            android:textAlignment="textEnd"
+            android:textColor="#FFEB3B"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/AIText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="335dp"
+            android:layout_marginTop="42dp"
+            android:text="AI"
+            android:textColor="#FFFEFE" />
+
+        <TextView
+            android:id="@+id/resignText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="143dp"
+            android:layout_marginTop="495dp"
+            android:text="Resign"
+            android:textColor="#FFFEFE" />
+
+        <TextView
+            android:id="@+id/drawText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="256dp"
+            android:layout_marginTop="494dp"
+            android:text="Draw"
+            android:textColor="#FFFEFE" />
 
         <!--        <FrameLayout-->
 <!--            android:layout_width="340dp"-->

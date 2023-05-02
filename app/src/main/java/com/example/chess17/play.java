@@ -45,7 +45,7 @@ public class play extends AppCompatActivity {
 
     ImageView piece;
 
-    TextView textView;
+    TextView textView, blackCheck, whiteCheck;
 
 
     Pieces[][] gameBoard = new Pieces[8][8];  // initializing the chess board with 2d array
@@ -62,6 +62,7 @@ public class play extends AppCompatActivity {
 
     Pieces removedPiece, fromPiece, toPiece, undoPawn;
 
+    StringBuilder gameMoves = new StringBuilder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -75,13 +76,15 @@ public class play extends AppCompatActivity {
 
         start(gameBoard); // initializes the gameBoard
 
-        StringBuilder gameMoves = new StringBuilder();
 
         textView = findViewById(R.id.textView);
 
         chessboardImage = findViewById(R.id.chessBoard);
         blackTurnImg = findViewById(R.id.blackTurn);
         whiteTurnImg = findViewById(R.id.whiteTurn);
+
+        whiteCheck = findViewById(R.id.whiteCheck);
+        blackCheck = findViewById(R.id.blackCheck);
 
         whiteTurnImg.requestFocus();
         blackTurnImg.clearFocus();
@@ -169,10 +172,10 @@ public class play extends AppCompatActivity {
                             if(randomPiece instanceof Pawn && randomPiece.enpassant)
                             {
                                 fromPiece = randomPiece;
-                                toPiece = gameBoard[fromRow][newCol];
+                                toPiece = gameBoard[randomRow][newCol];
 
 
-                                pawnEnPassantId = gameBoard[fromRow][newCol].name.toLowerCase() + gameBoard[fromRow][newCol].num;
+                                pawnEnPassantId = gameBoard[randomRow][newCol].name.toLowerCase() + gameBoard[randomRow][newCol].num;
                                 enPassantresId = getResources().getIdentifier(pawnEnPassantId, "id", getPackageName());
 
                                 passant = true;
@@ -191,8 +194,16 @@ public class play extends AppCompatActivity {
                                 gameBoard[newRow][newCol] = null;
                                 if(gameBoard[randomRow][randomCol].name.charAt(1) == 'K')
                                 {
-                                    King.wr = randomRow;
-                                    King.wc = randomCol;
+                                    if(gameBoard[randomRow][randomCol].name.charAt(0) == 'w')
+                                    {
+                                        King.wr = randomRow;
+                                        King.wc = randomCol;
+                                    }
+                                    else if(gameBoard[randomRow][randomCol].name.charAt(0) == 'b')
+                                    {
+                                        King.br = randomRow;
+                                        King.bc = randomCol;
+                                    }
                                 }
                                 if(castle)
                                 {
@@ -227,11 +238,12 @@ public class play extends AppCompatActivity {
                                 }
                                 print(gameBoard);
                                 System.out.println("check Moved");
-                            } else {
+                            } else
+                            {
                                 System.out.println("UI MOving");
-
+                                whiteCheck.setText( (gameBoard[newRow][newCol].name.charAt(0) == 'w') ? null : whiteCheck.getText());
+                                blackCheck.setText( (gameBoard[newRow][newCol].name.charAt(0) == 'b') ? null : blackCheck.getText());
 //                                        moveUIBoard(gameBoard);
-
                                 print(gameBoard);
 
                                 prevFromRow = randomRow;
@@ -265,7 +277,8 @@ public class play extends AppCompatActivity {
 
                                 ViewGroup parent = (ViewGroup) pieceToMove.getParent();
 //                                        ViewGroup removeParent = (ViewGroup) pieceToRemove.getParent();
-                                if (parent != null) {
+                                if (parent != null)
+                                {
                                     parent.removeView(pieceToMove);
                                     parent.removeView(pieceToRemove);
                                     RelativeLayout boardLayout = findViewById(R.id.board_layout);
@@ -274,8 +287,15 @@ public class play extends AppCompatActivity {
                                         if (randomCol < newCol) {
                                             prevToCol = 7;
                                             toPiece = gameBoard[randomRow][newCol - 1];
+                                            ImageView rookCastle = null;
 
-                                            ImageView rookCastle = findViewById(R.id.wr2);
+                                            if(gameBoard[newRow][newCol].name.charAt(0) == 'w')
+                                            {
+                                                rookCastle = findViewById(R.id.wr2);
+                                            }
+                                            else if(gameBoard[newRow][newCol].name.charAt(0) == 'b')
+                                                rookCastle = findViewById(R.id.br2);
+
                                             prevToImage = rookCastle;
 
                                             RelativeLayout.LayoutParams castleParams = (RelativeLayout.LayoutParams) rookCastle.getLayoutParams();
@@ -290,7 +310,15 @@ public class play extends AppCompatActivity {
                                             prevToCol = 0;
                                             toPiece = gameBoard[randomRow][newCol + 1];
 
-                                            ImageView rookCastle = findViewById(R.id.wr1);
+                                            ImageView rookCastle = null;
+
+                                            if(gameBoard[newRow][newCol].name.charAt(0) == 'w')
+                                            {
+                                                rookCastle = findViewById(R.id.wr2);
+                                            }
+                                            else if(gameBoard[newRow][newCol].name.charAt(0) == 'b')
+                                                rookCastle = findViewById(R.id.br2);
+
                                             prevToImage = rookCastle;
 
                                             RelativeLayout.LayoutParams castleParams = (RelativeLayout.LayoutParams) rookCastle.getLayoutParams();
@@ -318,12 +346,20 @@ public class play extends AppCompatActivity {
 
                                     if (pieceToMove != null) {
                                         boardLayout.addView(pieceToMove, params);
-                                        if (gameBoard[newRow][newCol].promote) {
-                                            pawnImgResource = R.drawable.wp;
+                                        if (gameBoard[newRow][newCol].promote)
+                                        {
+                                            if(gameBoard[newRow][newCol].name.charAt(0) == 'b')
+                                                pawnImgResource = R.drawable.bp;
+                                            if(gameBoard[newRow][newCol].name.charAt(0) == 'w')
+                                                pawnImgResource = R.drawable.wp;
+
                                             String imgId = undoPawn.name.toLowerCase() + undoPawn.num;
                                             pawnImgID = getResources().getIdentifier(imgId, "id", getPackageName());
 
-                                            pieceToMove.setImageResource(R.drawable.wq);
+                                            if(gameBoard[newRow][newCol].name.charAt(0) == 'b')
+                                                pieceToMove.setImageResource(R.drawable.bq);
+                                            if(gameBoard[newRow][newCol].name.charAt(0) == 'w')
+                                                pieceToMove.setImageResource(R.drawable.wq);
 //                                                    String id = gameBoard[toRow][toCol].name.toLowerCase() + 1;
                                             newId++;
                                             ImageView temp = findViewById(newId);
@@ -337,7 +373,7 @@ public class play extends AppCompatActivity {
                                             pieceToMove.setId(newId);
                                             gameBoard[newRow][newCol].num = newId;
 
-                                            gameMoves.append(pieceToMove.getId()).append(",").append(R.drawable.wq).append("\n");
+                                            gameMoves.append(pieceToMove.getId()).append(",").append(pawnImgResource).append("\n");
                                             gameBoard[newRow][newCol].promote = false;
                                         } else
                                         {
@@ -372,6 +408,7 @@ public class play extends AppCompatActivity {
                                     wTurn = true;
                                 }
                                 print(gameBoard);
+                                kingCheckmates();
                                 break;
                             }
                         }
@@ -474,8 +511,13 @@ public class play extends AppCompatActivity {
                     gameMoves.delete(lastMove, gameMoves.length());
                     gameMoves.append("\n");
                 }
+                if( check(gameBoard, King.wr, King.wc, 'w') )
+                    whiteCheck.setText("Check");
+
+                System.out.println(King.wr + " " + King.wc);
 
                 wTurn = true;
+                print(gameBoard);
                 textView = findViewById(R.id.textView);
                 textView.setText("White's Move");
                 prevToImage = prevFromImage = null;
@@ -581,7 +623,14 @@ public class play extends AppCompatActivity {
                     gameMoves.append("\n");
                 }
 
+                if( check(gameBoard, King.br, King.bc, 'b') )
+                {
+                    blackCheck.setText("Check");
+                    System.out.println(King.br + " " + King.bc);
+                }
+
                 wTurn = false;
+                print(gameBoard);
                 textView = findViewById(R.id.textView);
                 textView.setText("Black's Move");
                 prevToImage = prevFromImage = null;
@@ -619,8 +668,6 @@ public class play extends AppCompatActivity {
 
                             if (wTurn)
                             {
-
-
                                 System.out.println("white Turn");
 
                                 String fromImgId;
@@ -647,7 +694,7 @@ public class play extends AppCompatActivity {
                                         && gameBoard[fromRow][fromCol].isValid(gameBoard, fromRow, fromCol, toRow, toCol))
                                 {
                                     ImageView pieceToRemove = null;
-                                    removedPiece = null;
+                                    Pieces removingPiece = null;
 
                                     if(gameBoard[toRow][toCol] != null)
                                     {
@@ -668,7 +715,7 @@ public class play extends AppCompatActivity {
                                         }
 
                                         pieceToRemove = findViewById(resId);
-                                        removedPiece = gameBoard[toRow][toCol];
+                                        removingPiece = gameBoard[toRow][toCol];
                                     }
 
 
@@ -731,17 +778,19 @@ public class play extends AppCompatActivity {
                                             fromPiece = null;
                                             passant = false;
                                         }
-                                        else if(removedPiece != null)
+                                        else if(removingPiece != null)
                                         {
-                                            gameBoard[toRow][toCol] = removedPiece;
-                                            System.out.println("Removed Piece: " + removedPiece);
-                                            removedPiece = null;
+                                            gameBoard[toRow][toCol] = removingPiece;
+                                            System.out.println("Removed Piece: " + removingPiece);
+                                            removingPiece = null;
                                         }
                                         print(gameBoard);
                                         System.out.println("check Moved");
                                     } else {
+                                        whiteCheck.setText(null);
                                         System.out.println("UI MOving");
 
+                                        removedPiece = removingPiece;
 //                                        moveUIBoard(gameBoard);
 
                                         print(gameBoard);
@@ -958,7 +1007,8 @@ public class play extends AppCompatActivity {
                                 {
 
                                     ImageView pieceToRemove = null;
-                                    removedPiece = null;
+                                    Pieces removingPiece = null;
+
 
                                     if(gameBoard[toRow][toCol] != null)
                                     {
@@ -979,7 +1029,7 @@ public class play extends AppCompatActivity {
                                         }
 
                                         pieceToRemove = findViewById(resId);
-                                        removedPiece = gameBoard[toRow][toCol];
+                                        removingPiece = gameBoard[toRow][toCol];
                                     }
 
                                     if(gameBoard[fromRow][fromCol] instanceof King && gameBoard[fromRow][fromCol].isCastle)
@@ -1003,7 +1053,8 @@ public class play extends AppCompatActivity {
 
                                     gameBoard[fromRow][fromCol].move(gameBoard, fromRow, fromCol, toRow, toCol);
                                     System.out.println("gameboard moved");
-                                    if (check(gameBoard, King.br, King.bc, 'b')) {
+                                    if (check(gameBoard, King.br, King.bc, 'b'))
+                                    {
                                         gameBoard[fromRow][fromCol] = gameBoard[toRow][toCol];
                                         gameBoard[toRow][toCol] = null;
 
@@ -1038,17 +1089,21 @@ public class play extends AppCompatActivity {
                                             fromPiece = null;
                                             passant = false;
                                         }
-                                        else if(removedPiece != null)
+                                        else if(removingPiece != null)
                                         {
-                                            gameBoard[toRow][toCol] = removedPiece;
-                                            System.out.println("Removed Piece: " + removedPiece);
-                                            removedPiece = null;
+                                            gameBoard[toRow][toCol] = removingPiece;
+                                            System.out.println("Removed Piece: " + removingPiece);
+                                            removingPiece = null;
+
                                         }
 
+                                        System.out.println(King.br + " " + King.bc);
                                         System.out.println("gameboard backed to normal");
                                     } else {
                                         System.out.println("UI Moving");
+                                        blackCheck.setText(null);
 
+                                        removedPiece = removingPiece;
                                         print(gameBoard);
 
                                         prevFromRow = fromRow;
@@ -1238,21 +1293,7 @@ public class play extends AppCompatActivity {
                                 }
                             }
 
-                            System.out.println("CheckING");
-                            if (check(gameBoard, King.wr, King.wc, 'w')) {
-                                System.out.println("Check");
-                                if (checkmate(gameBoard, King.wr, King.wc, 'w')) {
-
-                                    System.out.println("Checkmate");
-                                    System.out.println("Black Wins");
-                                }
-                            } else if (check(gameBoard, King.br, King.bc, 'b')) {
-                                System.out.println("Check");
-                                if (checkmate(gameBoard, King.br, King.bc, 'b')) {
-                                    System.out.println("Checkmate");
-                                    System.out.println("White Wins");
-                                }
-                            }
+                            kingCheckmates();
 
                         }
                         else
@@ -1336,26 +1377,70 @@ public class play extends AppCompatActivity {
         draw.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 AlertDialog.Builder builder = new AlertDialog.Builder(play.this);
+                builder.setTitle("Draw Game");
+                builder.setMessage("Are you sure you want to Offer a Draw?");
 
-                // Set the dialog title and message
-                builder.setTitle("Draw");
-                builder.setMessage("Are you sure you want to offer a draw?");
+                // Add the buttons
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        // User clicked Yes, show save game dialog
+                        AlertDialog.Builder builder = new AlertDialog.Builder(play.this);
+                        builder.setTitle("Save Game");
+                        builder.setMessage("Do you want to save the game?");
 
-                // Set the "OK" button
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                        // Set up the input field
+                        final EditText input = new EditText(play.this);
+                        builder.setView(input);
+
+                        // Add the buttons
+                        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User clicked Save, get the entered game title
+                                try
+                                {
+                                    File recordedGamesFolder = new File(context.getFilesDir(), "RecordedGames");
+                                    recordedGamesFolder.mkdirs(); // Create the "RecordedGames" folder if it doesn't exist
+                                    gameMoves.append("Game Draw");
+                                    File file = new File(recordedGamesFolder, input.getText().toString() + ".txt");
+                                    FileWriter fileWriter = new FileWriter(file);
+                                    fileWriter.write(gameMoves.toString());
+                                    fileWriter.close();
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                Intent intent = new Intent(play.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User clicked Cancel, do nothing
+
+                                Intent intent = new Intent(play.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
+                        // Create and show the AlertDialog
+                        AlertDialog dialog2 = builder.create();
+                        dialog2.show();
+                        //Takes Home
                     }
                 });
 
-                // Set the "Cancel" button
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // User clicked "Cancel", do nothing
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked No, do nothing
                     }
                 });
 
+                // Create and show the AlertDialog
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
@@ -1367,34 +1452,37 @@ public class play extends AppCompatActivity {
         resign.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 AlertDialog.Builder builder = new AlertDialog.Builder(play.this);
+                builder.setTitle("Resign Game");
+                builder.setMessage("Are you sure you want to resign the game?");
 
-                // Set the dialog title and message
-                builder.setTitle("Resign");
-                builder.setMessage("Are you sure you want resign?");
-
-                // Set the "OK" button
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which)
+                // Add the buttons
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
                     {
+                        // User clicked Yes, show save game dialog
                         AlertDialog.Builder builder = new AlertDialog.Builder(play.this);
+                        builder.setTitle("Save Game");
+                        builder.setMessage("Do you want to save the game?");
 
+                        // Set up the input field
                         final EditText input = new EditText(play.this);
-                        input.setInputType(InputType.TYPE_CLASS_TEXT);
                         builder.setView(input);
 
-                        // Set up the buttons
-                        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String name = input.getText().toString();
-
+                        // Add the buttons
+                        builder.setPositiveButton("Save", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User clicked Save, get the entered game title
                                 try
                                 {
                                     File recordedGamesFolder = new File(context.getFilesDir(), "RecordedGames");
                                     recordedGamesFolder.mkdirs(); // Create the "RecordedGames" folder if it doesn't exist
-                                    File file = new File(recordedGamesFolder, name + ".txt");
+                                    gameMoves.append("Game Resigned");
+                                    File file = new File(recordedGamesFolder, input.getText().toString() + ".txt");
                                     FileWriter fileWriter = new FileWriter(file);
                                     fileWriter.write(gameMoves.toString());
                                     fileWriter.close();
@@ -1403,27 +1491,40 @@ public class play extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
 
-                                //nameList.add(name);
-                                // Save the game with the name provided by the user
-                                // ...
+                                //Takes Home
+                                Intent intent = new Intent(play.this, MainActivity.class);
+                                startActivity(intent);
                             }
-
                         });
-                        AlertDialog wDialog = builder.create();
-                        wDialog.show();
+
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id)
+                            {
+                                // User clicked Cancel, do nothing
+                                //Takes Home
+                                Intent intent = new Intent(play.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
+                        // Create and show the AlertDialog
+                        AlertDialog dialog2 = builder.create();
+                        dialog2.show();
+
+                    }
+
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked No, do nothing
                     }
                 });
 
-                // Set the "Cancel" button
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // User clicked "Cancel", do nothing
-                    }
-                });
-
-                // Create and show the dialog box
+                // Create and show the AlertDialog
                 AlertDialog dialog = builder.create();
                 dialog.show();
+
             }
         });
 
@@ -1441,6 +1542,111 @@ public class play extends AppCompatActivity {
 
 
 
+    public void kingCheckmates()
+    {
+        System.out.println("CheckING");
+        if (check(gameBoard, King.wr, King.wc, 'w'))
+        {
+            if (checkmate(gameBoard, King.wr, King.wc, 'w'))
+            {
+                // Create an alert pop-up with OK and Cancel buttons
+                AlertDialog.Builder builder = new AlertDialog.Builder(play.this);
+                builder.setTitle("Black Wins!");
+                builder.setMessage("Do you want to save the game?");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Create another pop-up to ask the user for the game title
+                        AlertDialog.Builder builder2 = new AlertDialog.Builder(play.this);
+                        builder2.setTitle("Enter Game Title");
+                        final EditText input = new EditText(play.this);
+                        builder2.setView(input);
+                        builder2.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Save the game with the specified title
+                                try
+                                {
+                                    File recordedGamesFolder = new File(context.getFilesDir(), "RecordedGames");
+                                    recordedGamesFolder.mkdirs(); // Create the "RecordedGames" folder if it doesn't exist
+                                    gameMoves.append("CheckMate, Black Wins!");
+                                    File file = new File(recordedGamesFolder, input.getText().toString() + ".txt");
+                                    FileWriter fileWriter = new FileWriter(file);
+                                    fileWriter.write(gameMoves.toString());
+                                    fileWriter.close();
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        builder2.setNegativeButton("Cancel", null);
+                        builder2.show();
+                    }
+                });
+                builder.setNegativeButton("Cancel", null);
+                builder.show();
+                System.out.println("Checkmate");
+                System.out.println("Black Wins");
+            }
+            else
+            {
+                //whiteCheck = findViewById(R.id.whiteCheck);
+                whiteCheck.setText("Check");
+            }
+        }
+        if (check(gameBoard, King.br, King.bc, 'b'))
+        {
+            System.out.println("Check");
+            if (checkmate(gameBoard, King.br, King.bc, 'b'))
+            {
+                // Create an alert pop-up with OK and Cancel buttons
+                AlertDialog.Builder builder = new AlertDialog.Builder(play.this);
+                builder.setTitle("White Wins!");
+                builder.setMessage("Do you want to save the game?");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Create another pop-up to ask the user for the game title
+                        AlertDialog.Builder builder2 = new AlertDialog.Builder(play.this);
+                        builder2.setTitle("Enter Game Title");
+                        final EditText input = new EditText(play.this);
+                        builder2.setView(input);
+                        builder2.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Save the game with the specified title
+                                try
+                                {
+                                    File recordedGamesFolder = new File(context.getFilesDir(), "RecordedGames");
+                                    recordedGamesFolder.mkdirs(); // Create the "RecordedGames" folder if it doesn't exist
+                                    gameMoves.append("CheckMate, White Wins!");
+                                    File file = new File(recordedGamesFolder, input.getText().toString() + ".txt");
+                                    FileWriter fileWriter = new FileWriter(file);
+                                    fileWriter.write(gameMoves.toString());
+                                    fileWriter.close();
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        builder2.setNegativeButton("Cancel", null);
+                        builder2.show();
+                    }
+                });
+                builder.setNegativeButton("Cancel", null);
+                builder.show();
+                System.out.println("Checkmate");
+                System.out.println("White Wins");
+            }
+            else
+            {
+                // blackCheck = findViewById(R.id.blackCheck);
+                blackCheck.setText("Check");
+            }
+        }
+    }
 
 
     //  Reused console version of chess code
@@ -1492,7 +1698,8 @@ public class play extends AppCompatActivity {
         //System.out.println(color);
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (gameBoard[i][j] != null && gameBoard[i][j].name.charAt(0) != color && gameBoard[i][j].isValid(gameBoard, i, j, r, c)) {
+                if (gameBoard[i][j] != null && gameBoard[i][j].name.charAt(0) != color && gameBoard[i][j].isValid(gameBoard, i, j, r, c))
+                {
                     aR = i;
                     aC = j;
                     return true;
@@ -1559,6 +1766,27 @@ public class play extends AppCompatActivity {
                     System.out.println("above can kill the attacker");
                     System.out.println(i + " " + j);
                     System.out.println(aR + " " + aC);
+                    if(gameBoard[i][j].name.charAt(1) == 'K')
+                    {
+                        Pieces attacker = gameBoard[aR][aC];
+                        int attackerR = aR, attackerC = aC;
+
+                        gameBoard[aR][aC] = gameBoard[i][j];
+                        gameBoard[i][j] = null;
+                        if(check(gameBoard, i, j, color))
+                        {
+                            gameBoard[i][j] = gameBoard[attackerR][attackerC];
+                            gameBoard[attackerR][attackerC] = attacker;
+                            aR = attackerR;
+                            aC = attackerC;
+                            continue;
+                        }
+                        else
+                        {
+                            gameBoard[i][j] = gameBoard[aR][aC];
+                            gameBoard[aR][aC] = attacker;
+                        }
+                    }
                     return false;
                 }
             }

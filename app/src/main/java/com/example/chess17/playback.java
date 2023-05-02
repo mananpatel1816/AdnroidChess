@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,6 +25,7 @@ public class playback extends AppCompatActivity
 
     private Context context;
     static String name;
+    String status;
     int lineCounter = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,25 +41,30 @@ public class playback extends AppCompatActivity
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
 
-            String line;
+            String line, prevLine = null;
             while ((line = reader.readLine()) != null)
             {
-                System.out.println(line);
-                lines.add(line);
+                if(prevLine != null)
+                {
+                    System.out.println(prevLine);
+                    lines.add(prevLine);
+                }
+                prevLine = line;
             }
-
+            status = prevLine;
             // Close the reader
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Button nextButton = findViewById(R.id.next);
+        ImageButton nextButton = findViewById(R.id.next);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                if (lineCounter < lines.size()) {
+                if (lineCounter < lines.size())
+                {
 
                     int[] info = Arrays.stream(lines.get(lineCounter).split(","))
                             .mapToInt(Integer::parseInt)
@@ -100,6 +108,11 @@ public class playback extends AppCompatActivity
                         }
                     }
 
+                }
+                else
+                {
+                    TextView gameStatus = findViewById(R.id.status);
+                    gameStatus.setText(status);
                 }
                 lineCounter++;
             }

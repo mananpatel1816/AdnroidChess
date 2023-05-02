@@ -17,17 +17,63 @@
 
         <ListView
             android:id="@+id/gameList"
-            android:layout_width="305dp"
-            android:layout_height="415dp"
+            android:layout_width="302dp"
+            android:layout_height="342dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="46dp"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="148dp"
             android:background="#FFFFFF"
             android:padding="15dp"
             android:textSize="50sp" />
 
+        <Button
+            android:id="@+id/alpha"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="77dp"
+            android:background="@android:color/transparent"
+            android:text="Sort By Name"
+            android:textColor="#040303" />
 
+        <Button
+            android:id="@+id/date"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="205dp"
+            android:layout_marginTop="77dp"
+            android:background="@android:color/transparent"
+            android:text="Sort By Date"
+            android:textColor="#040303" />
+
+        <ImageView
+            android:id="@+id/plak"
+            android:layout_width="301dp"
+            android:layout_height="129dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="49dp"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/sortc" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="206dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="96dp"
+            android:text="Recorded Games"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold|italic" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

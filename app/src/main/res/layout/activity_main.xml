@@ -19,24 +19,36 @@
             app:srcCompat="@drawable/home" />
 
 
+        <ImageView
+            android:id="@+id/plak"
+            android:layout_width="259dp"
+            android:layout_height="175dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="325dp"
+            android:layout_marginRight="63dp"
+            app:srcCompat="@drawable/plak" />
+
         <Button
             android:id="@+id/playback"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="464dp"
-            android:layout_marginRight="145dp"
+            android:layout_marginTop="386dp"
+            android:layout_marginRight="133dp"
+            android:background="@android:color/transparent"
             android:text="Playback" />
 
         <Button
             android:id="@+id/play"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="381dp"
-            android:layout_marginRight="164dp"
+            android:layout_marginTop="354dp"
+            android:layout_marginRight="147dp"
+            android:background="@android:color/transparent"
             android:text="Play" />
 
 

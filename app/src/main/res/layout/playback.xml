@@ -20,14 +20,16 @@
 
         <ImageButton
             android:id="@+id/back"
-            android:layout_width="67dp"
-            android:layout_height="43dp"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="44dp"
-            android:layout_marginTop="29dp"
+            android:layout_marginLeft="46dp"
+            android:layout_marginTop="4dp"
             android:layout_marginRight="313dp"
-            app:srcCompat="@drawable/main" />
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/main"
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/whiteTurn"
@@ -35,8 +37,8 @@
             android:layout_height="43dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="432dp"
-            android:layout_marginRight="310dp"
+            android:layout_marginTop="433dp"
+            android:layout_marginRight="301dp"
             app:srcCompat="@drawable/wa" />
 
         <ImageView
@@ -46,7 +48,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="62dp"
-            android:layout_marginRight="36dp"
+            android:layout_marginRight="32dp"
             app:srcCompat="@drawable/ba" />
 
 
@@ -59,7 +61,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="108dp"
-            android:layout_marginRight="42dp">
+            android:layout_marginRight="32dp">
 
 
             <ImageView
@@ -499,15 +501,29 @@
 
         </RelativeLayout>
 
-        <Button
+        <ImageButton
             android:id="@+id/next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="144dp"
+            android:layout_height="60dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="161dp"
-            android:layout_marginTop="466dp"
-            android:text="Next" />
+            android:layout_marginLeft="129dp"
+            android:layout_marginTop="440dp"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/next" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="168dp"
+            android:layout_height="34dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="113dp"
+            android:layout_marginTop="32dp"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
 
 
     </RelativeLayout>
